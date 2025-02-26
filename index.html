@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>rank list</title>
+    <base target="_top">
+</head>
+<body>
+    <h1>Google Sheet Data</h1>
+    <table id="data-table" border="1"></table>
+    <script>
+        function fetchData(){
+            google.script.run.withSuccessHandler(updateTable).getData();
+
+        }
+        function updateTable(data){
+            var table=document.getElementById('data-table')
+            table.innerHTML ='';
+            data.forEach(function(row){
+                var tr=document.createElement('tr');
+                row.forEach(function(cell){
+                    var td=document.createElement('td')
+                    td.textContent=cell;
+                    tr.appendChild(td);
+                })
+            table.appendChild(tr);
+            })
+        }
+        window.onload=fetchData()
+    </script>
+</body>
+</html>
